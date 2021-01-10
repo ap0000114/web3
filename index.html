@@ -90,7 +90,7 @@
 
         function get_token() {
 
-            pageLog("콜백 데이터  : [" + location.href + "]");
+            pageLog("콜백 데이터 URL  : [" + location.href + "]");
 
             let tempString = location.search;
 
@@ -110,6 +110,7 @@
                 if (code.indexOf("&") != -1) {
                     code = code.substring(0, code.indexOf("&"));
                 }
+                pageLog("code : [" + code + "]");
             } else {
                 pageLog(find_code + " is not found");
             }
@@ -120,6 +121,7 @@
                 if (state.indexOf("&") != -1) {
                     state = state.substring(0, state.indexOf("&"));
                 }
+                pageLog("state : [" + state + "]");
             } else {
                 pageLog(find_state + " is not found");
             }
@@ -130,6 +132,7 @@
                 if (error.indexOf("&") != -1) {
                     error = error.substring(0, error.indexOf("&"));
                 }
+                pageLog("error : [" + error + "]");
             } else {
                 pageLog(find_error + " is not found");
             }
@@ -140,14 +143,10 @@
                 if (error_description.indexOf("&") != -1) {
                     error_description = error_description.substring(0, error_description.indexOf("&"));
                 }
+                pageLog("error_description : [" + error_description + "]");
             } else {
                 pageLog(find_error_description + " is not found");
             }
-
-            pageLog("code : [" + code + "]");
-            pageLog("state : [" + state + "]");
-            pageLog("error : [" + error + "]");
-            pageLog("error_description : [" + error_description + "]");
 
 
             let login_url = "https://nid.naver.com/oauth2.0/token";
@@ -188,7 +187,7 @@
                 }
             }
             // http 요청 타입과 주소, 동기식 여부
-            xhttp.open("GET", login_url, true);
+            xhttp.open("GET", login_url, false);
             xhttp.send();
         }
 
@@ -225,7 +224,7 @@
                 }
             }
             // http 요청 타입과 주소, 동기식 여부
-            xhttp.open("GET", "test.json", true);
+            xhttp.open("GET", "test.json", false);
             //xhttp.send();
         }
 
