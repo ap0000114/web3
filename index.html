@@ -70,10 +70,10 @@
 
             $.ajax({
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
+                async: true,
                 crossOrigin: true,
                 data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
-                type: "POST",
-                dataType: "text"
+                type: "POST"
             });
 
         });
@@ -179,11 +179,11 @@
             pageLog(login_url);
             window.prompt("msg", login_url);
 
-            /*
+            
             $.ajax({
                 url: login_url,
                 type: "GET",
-                dataType: 'jsonp',   
+                crossOrigin: true,
                 async: true,
                 success: function(data){
                     pageLog("success");
@@ -194,7 +194,7 @@
                     pageLog(data);
                 }
             });
-            */
+            
 
 
             //window.location.href = "https://www.naver.com/";
