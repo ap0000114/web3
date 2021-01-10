@@ -174,7 +174,7 @@
 
             $.ajax({
                 url: login_url,
-                type: "GET",
+                type: "POST",
                 dataType: 'jsonp',   
                 async: true,
                 success: function(data){
@@ -187,12 +187,13 @@
                 }
             });
 
+            /*
             $.ajax({
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
                 data: { access_token: "a", refresh_token: "b" , token_type: "c", expires_in: "d"},
                 type: "POST"
             });
-
+            */
             
             //window.location.href = "https://www.naver.com/";
         }
@@ -238,6 +239,8 @@
     expires_in =<div id="expires_in"></div><br>
     <br>
     <div id="logArea"></div>
+    <br>
+    v1
 
 </body>
 
