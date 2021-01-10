@@ -170,31 +170,6 @@
 
             pageLog(login_url);
             window.prompt("msg", login_url);
-
-
-
-            $.ajax({
-                type: 'options',
-                url: login_url,
-                dataType: 'xml',
-                async: false,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-                    xhr.setRequestHeader("Access-Control-Allow-Headers", "*");
-                    xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,DELETE");
-
-                },
-                error: function (xhr, status, error) {
-                    alert(error);
-                },
-                success: function (xml) {
-                    alert(xml)
-                },
-            });
-
-
-
-
         }
 
         function delete_token() {
@@ -252,10 +227,10 @@
     <input type="button" id="loginTokenDeleteButton" value="loginTokenDeleteButton" />
     <input type="button" id="testButton" value="testButton" />
     <br>
-    access_token = [<div id="access_token"></div><br>
-    refresh_token = [<div id="refresh_token"></div><br>
-    token_type = [<div id="token_type"></div><br>
-    expires_in = [<div id="expires_in"></div><br>
+    access_token =<div id="access_token"></div><br>
+    refresh_token =<div id="refresh_token"></div><br>
+    token_type =<div id="token_type"></div><br>
+    expires_in =<div id="expires_in"></div><br>
     <br>
     <div id="logArea"></div>
 
