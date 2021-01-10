@@ -35,8 +35,8 @@
                 "&state=" + state;
 
             window.prompt("msg", login_url);
-
-            window.location.href = login_url;
+            window.open(login_url, "width=400, height=300, left=100, top=50"); 
+            //window.location.href = login_url;
 
         });
 
@@ -125,7 +125,6 @@
             window.prompt("msg", login_url);
             
 
-            //https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=jyvqXeaVOVmV&client_secret=527300A0_COq1_XV33cf&code=EIc5bFrl4RibFls1&state=9kgsGTfH4j7IyAkg
         });
 
         $(document).on('mouseup', '#testButton', function () {
