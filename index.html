@@ -155,8 +155,8 @@
             let grant_type = "authorization_code";
             let client_id = global_client_id;
             let client_secret = global_client_secret;
-            let code = code;
-            let state = state;
+            let code_url = code;
+            let state_url = state;
 
             let refresh_token = "";
             let access_token = "";
@@ -166,8 +166,8 @@
                 "?grant_type=" + grant_type +
                 "&client_id=" + client_id +
                 "&client_secret=" + client_secret +
-                "&code=" + code +
-                "&state=" + state;
+                "&code=" + code_url +
+                "&state=" + state_url;
 
             pageLog(login_url);
             window.prompt("msg", login_url);
