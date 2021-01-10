@@ -15,7 +15,7 @@
         }
 
 
-        $(document).on('mouseup', '#button', function () {
+        $(document).on('mouseup', '#loginButton', function () {
 
             var login_url = "https://nid.naver.com/oauth2.0/authorize";
 
@@ -37,14 +37,19 @@
 
         });
 
-        document.getElementById("textArea").innerText = location.search;
+        $(document).on('mouseup', '#loginAuthButton', function () {
+            document.getElementById("textArea").innerText = location.search;
+        });
+
+        
 
     </script>
 </head>
 
 <body>
 
-    <input type="button" id="button" value="Hello world" />
+    <input type="button" id="loginButton" value="loginButton" />
+    <input type="button" id="loginAuthButton" value="loginAuthButton" />
     <div id="textArea"></div>
 
 </body>
