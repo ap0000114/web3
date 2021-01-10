@@ -72,6 +72,7 @@
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
                 async: true,
                 crossOrigin: true,
+                dataType: "json",
                 data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
                 type: "POST"
             });
@@ -185,6 +186,7 @@
                 type: "GET",
                 crossOrigin: true,
                 async: true,
+                dataType: "json",
                 success: function(data){
                     pageLog("success");
                     pageLog(data);
@@ -242,7 +244,7 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.1
+    v1.2
 
 </body>
 
