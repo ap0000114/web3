@@ -14,6 +14,10 @@
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         }
 
+        function pageLog(log_data) {
+
+            document.getElementById("logArea").innerHTML = document.getElementById("logArea").innerHTML + log_data + "<br>";
+        }
 
         $(document).on('mouseup', '#loginButton', function () {
 
@@ -30,18 +34,108 @@
                 "&redirect_uri=" + redirect_uri +
                 "&state=" + state;
 
-            window.prompt("msg",login_url);
+            window.prompt("msg", login_url);
 
             window.location.href = login_url;
-            //document.getElementById("textArea").innerText = "log : " + login_url + "<br>";
 
         });
 
         $(document).on('mouseup', '#loginAuthButton', function () {
-            document.getElementById("textArea").innerText = location.search;
+
+            pageLog("콜백 데이터  : [" + location.href + "]");
+
+            var tempString = location.search;
+
+            var find_code = "code=";
+            var find_state = "state=";
+            var find_error = "error=";
+            var find_error_description = "error_description=";
+
+            var code = "";
+            var state = "";
+            var error = "";
+            var error_description = "";
+
+            if (tempString.indexOf(find_code) != -1) {
+                code = tempString.substring(tempString.indexOf(find_code) + find_code.length);
+
+                if (code.indexOf("&") != -1) {
+                    code = code.substring(0, code.indexOf("&"));
+                }
+            } else {
+                pageLog(find_code + " is not found");
+            }
+
+            if (tempString.indexOf(find_state) != -1) {
+                state = tempString.substring(tempString.indexOf(find_state) + find_state.length);
+
+                if (state.indexOf("&") != -1) {
+                    state = state.substring(0, state.indexOf("&"));
+                }
+            } else {
+                pageLog(find_state + " is not found");
+            }
+
+            if (tempString.indexOf(find_error) != -1) {
+                error = tempString.substring(tempString.indexOf(find_error) + find_error.length);
+
+                if (error.indexOf("&") != -1) {
+                    error = error.substring(0, error.indexOf("&"));
+                }
+            } else {
+                pageLog(find_error + " is not found");
+            }
+
+            if (tempString.indexOf(find_error_description) != -1) {
+                error_description = tempString.substring(tempString.indexOf(find_error_description) + find_error_description.length);
+
+                if (error_description.indexOf("&") != -1) {
+                    error_description = error_description.substring(0, error_description.indexOf("&"));
+                }
+            } else {
+                pageLog(find_error_description + " is not found");
+            }
+
+            pageLog("code : [" + code + "]");
+            pageLog("state : [" + state + "]");
+            pageLog("error : [" + error + "]");
+            pageLog("error_description : [" + error_description + "]");
+
+
+            var login_url = "https://nid.naver.com/oauth2.0/token";
+
+            var grant_type = "authorization_code";
+            var client_id = "rtgvfRcGt3nfOTH1mVuZ";
+            var client_secret = "tjfTeXkquy";
+            var code = code;
+            var state = state;
+
+            var refresh_token = "";
+            var access_token = "";
+            var service_provider = "";
+
+            login_url = login_url +
+                "?response_type=" + grant_type +
+                "&client_id=" + client_id +
+                "&redirect_uri=" + client_secret +
+                "&code=" + code +
+                "&state=" + state;
+
+            pageLog(login_url);
+            window.prompt("msg", login_url);
+            
+
+            //https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=jyvqXeaVOVmV&client_secret=527300A0_COq1_XV33cf&code=EIc5bFrl4RibFls1&state=9kgsGTfH4j7IyAkg
         });
 
-        
+        $(document).on('mouseup', '#testButton', function () {
+            //var tempString = "?code=QDQoKuGx6EdsHU7OSM&state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38";
+            var tempString = "?state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38%error=QDQoKuGx6EdsHU7OSM&error_description=123ff123d123";
+
+
+        });
+
+
 
     </script>
 </head>
@@ -50,7 +144,8 @@
 
     <input type="button" id="loginButton" value="loginButton" />
     <input type="button" id="loginAuthButton" value="loginAuthButton" />
-    <div id="textArea"></div>
+    <input type="button" id="testButton" value="testButton" />
+    <div id="logArea"></div>
 
 </body>
 
