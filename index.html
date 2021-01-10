@@ -5,6 +5,7 @@
     <meta charset="utf-8">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script>
     <script type="text/javascript">
 
         const global_client_id = "rtgvfRcGt3nfOTH1mVuZ";
@@ -69,7 +70,7 @@
 
             $.ajax({
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
-                dataType: 'jsonp',
+                crossOrigin: true,
                 data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
                 type: "GET",
                 dataType: "text"
@@ -241,7 +242,7 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.6
+    v1.7
 
 </body>
 
