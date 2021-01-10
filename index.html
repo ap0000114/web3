@@ -7,6 +7,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
 
+        const global_client_id = "rtgvfRcGt3nfOTH1mVuZ";
+        const global_client_secret = "tjfTeXkquy";
+
         function getUUID() {
             function s4() {
                 return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
@@ -19,14 +22,62 @@
             document.getElementById("logArea").innerHTML = document.getElementById("logArea").innerHTML + log_data + "<br>";
         }
 
+        $(document).ready(function () {
+            let tempString = location.search;
+            let find_function = "function=";
+
+            if (tempString.indexOf(find_function) != -1) {
+
+                let program_function = tempString.substring(tempString.indexOf(find_function) + find_code.length);
+
+                switch (program_function) {
+                    case login:
+
+                        break;
+                    case get_token:
+
+                        break;
+                    case delete_token:
+
+                        break;
+                }
+            }
+        });
+
+
         $(document).on('mouseup', '#loginButton', function () {
 
-            var login_url = "https://nid.naver.com/oauth2.0/authorize";
+            login();
 
-            var response_type = "code";
-            var client_id = "rtgvfRcGt3nfOTH1mVuZ";
-            var redirect_uri = encodeURI("https://ap0000114.github.io/web3/index.html", "UTF-8");
-            var state = getUUID();
+        });
+
+        $(document).on('mouseup', '#loginAuthButton', function () {
+
+            get_token();
+
+        });
+
+        $(document).on('mouseup', '#loginTokenDeleteButton', function () {
+
+            delete_token();
+
+        });
+
+        $(document).on('mouseup', '#testButton', function () {
+            //let tempString = "?code=QDQoKuGx6EdsHU7OSM&state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38";
+            let tempString = "?state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38%error=QDQoKuGx6EdsHU7OSM&error_description=123ff123d123";
+
+
+        });
+
+        function login() {
+
+            let login_url = "https://nid.naver.com/oauth2.0/authorize";
+
+            let response_type = "code";
+            let client_id = global_client_id;
+            let redirect_uri = encodeURI("https://ap0000114.github.io/web3/index.html", "UTF-8");
+            let state = getUUID();
 
             login_url = login_url +
                 "?response_type=" + response_type +
@@ -34,27 +85,24 @@
                 "&redirect_uri=" + redirect_uri +
                 "&state=" + state;
 
-            window.prompt("msg", login_url);
-            window.open(login_url, "width=400, height=300, left=100, top=50"); 
-            //window.location.href = login_url;
+            window.location.href = login_url;
+        }
 
-        });
-
-        $(document).on('mouseup', '#loginAuthButton', function () {
+        function get_token() {
 
             pageLog("콜백 데이터  : [" + location.href + "]");
 
-            var tempString = location.search;
+            let tempString = location.search;
 
-            var find_code = "code=";
-            var find_state = "state=";
-            var find_error = "error=";
-            var find_error_description = "error_description=";
+            let find_code = "code=";
+            let find_state = "state=";
+            let find_error = "error=";
+            let find_error_description = "error_description=";
 
-            var code = "";
-            var state = "";
-            var error = "";
-            var error_description = "";
+            let code = "";
+            let state = "";
+            let error = "";
+            let error_description = "";
 
             if (tempString.indexOf(find_code) != -1) {
                 code = tempString.substring(tempString.indexOf(find_code) + find_code.length);
@@ -102,17 +150,17 @@
             pageLog("error_description : [" + error_description + "]");
 
 
-            var login_url = "https://nid.naver.com/oauth2.0/token";
+            let login_url = "https://nid.naver.com/oauth2.0/token";
 
-            var grant_type = "authorization_code";
-            var client_id = "rtgvfRcGt3nfOTH1mVuZ";
-            var client_secret = "tjfTeXkquy";
-            var code = code;
-            var state = state;
+            let grant_type = "authorization_code";
+            let client_id = global_client_id;
+            let client_secret = global_client_secret;
+            let code = code;
+            let state = state;
 
-            var refresh_token = "";
-            var access_token = "";
-            var service_provider = "";
+            let refresh_token = "";
+            let access_token = "";
+            let service_provider = "";
 
             login_url = login_url +
                 "?grant_type=" + grant_type +
@@ -123,27 +171,84 @@
 
             pageLog(login_url);
             window.prompt("msg", login_url);
-            
 
-        });
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = (e) => {
+                let req = e.target;
+                
+                // 통신 상태가 완료가 되면.
+                if (req.readyState === XMLHttpRequest.DONE) {
 
-        $(document).on('mouseup', '#testButton', function () {
-            //var tempString = "?code=QDQoKuGx6EdsHU7OSM&state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38";
-            var tempString = "?state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38%error=QDQoKuGx6EdsHU7OSM&error_description=123ff123d123";
+                    // Http response 응답코드가 200(정상)이면
+                    if (req.status === 200) {
 
+                        pageLog(req.response);
+                        pageLog(req.responseText);
+                    }
+                }
+            }
+            // http 요청 타입과 주소, 동기식 여부
+            xhttp.open("GET", login_url, true);
+            xhttp.send();
+        }
 
-        });
+        function delete_token() {
+
+            let login_url = "https://nid.naver.com/oauth2.0/authorize";
+
+            let grant_type = "delete";
+            let client_id = global_client_id;
+            let client_secret = global_client_secret;
+            let access_token = "";
+            let service_provider = "NAVER";
+
+            login_url = login_url +
+                "?grant_type=" + grant_type +
+                "&client_id=" + client_id +
+                "&client_secret=" + client_secret +
+                "&access_token=" + access_token +
+                "&service_provider=" + service_provider;
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = (e) => {
+                let req = e.target;
+                
+                // 통신 상태가 완료가 되면.
+                if (req.readyState === XMLHttpRequest.DONE) {
+
+                    // Http response 응답코드가 200(정상)이면
+                    if (req.status === 200) {
+
+                        pageLog(req.response);
+                        pageLog(req.responseText);
+                    }
+                }
+            }
+            // http 요청 타입과 주소, 동기식 여부
+            xhttp.open("GET", "test.json", true);
+            //xhttp.send();
+        }
+
 
 
 
     </script>
+
+
 </head>
 
 <body>
 
     <input type="button" id="loginButton" value="loginButton" />
     <input type="button" id="loginAuthButton" value="loginAuthButton" />
+    <input type="button" id="loginTokenDeleteButton" value="loginTokenDeleteButton" />
     <input type="button" id="testButton" value="testButton" />
+    <br>
+    access_token = [<div id="access_token"></div>] <br>
+    refresh_token = [<div id="refresh_token"></div>] <br>
+    token_type = [<div id="token_type"></div>] <br>
+    expires_in = [<div id="expires_in"></div>] <br>
+    <br>
     <div id="logArea"></div>
 
 </body>
