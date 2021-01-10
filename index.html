@@ -175,6 +175,7 @@
             $.ajax({
                 url: login_url,
                 type: "GET",
+                dataType: 'jsonp',   
                 async: true,
                 success: function(result){
                     pageLog("success");
