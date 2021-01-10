@@ -65,9 +65,13 @@
         });
 
         $(document).on('mouseup', '#testButton', function () {
-            //let tempString = "?code=QDQoKuGx6EdsHU7OSM&state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38";
-            let tempString = "?state=e77eefd0-0b2f-d754-bb5f-4890e6e71a38%error=QDQoKuGx6EdsHU7OSM&error_description=123ff123d123";
 
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
+                data: { access_token: "a", refresh_token: "b" , token_type: "c", expires_in: "d"},
+                type: "POST",
+                dataType: "text"
+            });
 
         });
 
@@ -188,14 +192,7 @@
                 }
             });
             */
-
-            /*
-            $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
-                data: { access_token: "a", refresh_token: "b" , token_type: "c", expires_in: "d"},
-                type: "POST"
-            });
-            */
+            
 
             //window.location.href = "https://www.naver.com/";
         }
@@ -242,7 +239,7 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.2
+    v1.3
 
 </body>
 
