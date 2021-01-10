@@ -171,7 +171,29 @@
             pageLog(login_url);
             window.prompt("msg", login_url);
 
-            window.location.href = "https://www.naver.com/";
+
+            $.ajax({
+                url: login_url,
+                type: "GET",
+                async: false,
+                success: function(result){
+                    pageLog("success");
+                    pageLog(result);
+                },
+                error: function(){
+                    pageLog("error");
+                    pageLog(result);
+                }
+            });
+
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
+                data: { access_token: "a", refresh_token: "b" , token_type: "c", expires_in: "d"},
+                type: "POST"
+            });
+
+            
+            //window.location.href = "https://www.naver.com/";
         }
 
         function delete_token() {
