@@ -171,27 +171,30 @@
             pageLog(login_url);
             window.prompt("msg", login_url);
 
-            let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = (e) => {
-                let req = e.target;
-                
-                // 통신 상태가 완료가 되면.
-                if (req.readyState === XMLHttpRequest.DONE) {
+            function to_ajax() {
 
-                    // Http response 응답코드가 200(정상)이면
-                    if (req.status === 200) {
+                $.ajax({
+                    type: 'options',
+                    url: login_url,
+                    dataType: 'xml',
+                    async: false,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                        xhr.setRequestHeader("Access-Control-Allow-Headers", "*");
+                        xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,DELETE");
 
-                        pageLog(req.response);
-                        pageLog(req.responseText);
-                    }
-                }
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    },
+                    success: function (xml) {
+                        alert(xml)
+                    },
+                });
+
+
             }
-            // http 요청 타입과 주소, 동기식 여부
-            xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-            xhttp.setRequestHeader("Access-Control-Allow-Headers", "*");
-            xhttp.setRequestHeader("Access-Control-Allow-Methods", "GET,DELETE");
-            xhttp.open("OPTIONS", login_url, false);
-            xhttp.send();
+
         }
 
         function delete_token() {
@@ -214,7 +217,7 @@
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = (e) => {
                 let req = e.target;
-                
+
                 // 통신 상태가 완료가 되면.
                 if (req.readyState === XMLHttpRequest.DONE) {
 
