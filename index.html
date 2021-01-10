@@ -68,6 +68,7 @@
 
             $.ajax({
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
+                dataType: 'jsonp',  
                 data: { access_token: "a", refresh_token: "b" , token_type: "c", expires_in: "d"},
                 type: "POST",
                 dataType: "text"
@@ -239,7 +240,7 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.3
+    v1.4
 
 </body>
 
