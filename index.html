@@ -217,13 +217,13 @@
 
             document.getElementById("resultArea").innerHTML = "<iframe id=\"authIframe\" src=\"" + login_url + "\"></iframe>"
 
-            /*
+            
             $.ajax({
                 url: login_url,
                 type: "GET",
                 crossOrigin: true,
                 async: true,
-                dataType: "json",
+                dataType: "text/plain",
                 headers: { 
                     "Access-Control-Allow-Methods":"POST, GET, OPTIONS, DELETE",
                     "Access-Control-Max-Age":"3600",
@@ -239,7 +239,7 @@
                     pageLog(data);
                 }
             });
-            */
+            
 
             //window.location.href = login_url;
             //window.location.href = "https://www.naver.com/";
@@ -296,7 +296,7 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.14
+    v1.15
 
     <hr size="10px">
     <br>
