@@ -70,10 +70,9 @@
 
         $(document).on('mouseup', '#pasingButton', function () {
 
-            pageLog(document.getElementById("resultArea").querySelector("iframe").innerHTML);
-            pageLog(document.getElementById("resultArea").querySelector("iframe").firstChild().innerHTML);
+            pageLog(document.getElementById("authIframe").innerHTML);
 
-            let auth_json_data = JSON.parse(document.getElementById("resultArea").querySelector("iframe").firstChild().innerHTML);
+            let auth_json_data = JSON.parse(document.getElementById("authIframe").innerHTML);
 
             document.getElementById("access_token").innerHTML = auth_json_data.access_token;
             document.getElementById("refresh_token").innerHTML = auth_json_data.refresh_token;
@@ -210,7 +209,7 @@
 
             pageLog(login_url);
 
-            document.getElementById("resultArea").innerHTML = "<iframe src=\"" + login_url + "\"></iframe>"
+            document.getElementById("resultArea").innerHTML = "<iframe id=\"authIframe\" src=\"" + login_url + "\"></iframe>"
 
             /*
             $.ajax({
@@ -291,7 +290,7 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.04
+    v1.05
 
     <hr size="10px">
     <br>
