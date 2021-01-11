@@ -76,7 +76,21 @@
                 crossOrigin: true,
                 async: true,
                 dataType: "text",
-                data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" }
+                headers: { 
+                    "Access-Control-Allow-Methods":"POST, GET, OPTIONS, DELETE",
+                    "Access-Control-Max-Age":"3600",
+                    "Access-Control-Allow-Headers":"x-requested-with",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
+                success: function(data){
+                    pageLog("success");
+                    pageLog(data);
+                },
+                error: function(){
+                    pageLog("error");
+                    pageLog(data);
+                }
             });
 
         });
@@ -189,6 +203,12 @@
                 crossOrigin: true,
                 async: true,
                 dataType: "json",
+                headers: { 
+                    "Access-Control-Allow-Methods":"POST, GET, OPTIONS, DELETE",
+                    "Access-Control-Max-Age":"3600",
+                    "Access-Control-Allow-Headers":"x-requested-with",
+                    "Access-Control-Allow-Origin":"*"
+                },
                 success: function(data){
                     pageLog("success");
                     pageLog(data);
@@ -246,7 +266,7 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.2
+    v1.3
 
 </body>
 
