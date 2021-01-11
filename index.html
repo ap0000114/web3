@@ -70,7 +70,9 @@
 
         $(document).on('mouseup', '#pasingButton', function () {
 
-            pageLog($('iframe').contents().html());
+            pageLog(document.getElementById("authIframe").innerHTML);
+
+            /*
             pageLog($('iframe[name=authIframe]').contents().html());
 
             let auth_json_data = JSON.parse($('iframe[name=authIframe]').contents().find("pre").innerHTML);
@@ -79,6 +81,8 @@
             document.getElementById("refresh_token").innerHTML = auth_json_data.refresh_token;
             document.getElementById("token_type").innerHTML = auth_json_data.token_type;
             document.getElementById("expires_in").innerHTML = auth_json_data.expires_in;
+
+            */
 
         });
 
@@ -210,7 +214,7 @@
 
             pageLog(login_url);
 
-            document.getElementById("resultArea").innerHTML = "<iframe name=\"authIframe\" src=\"" + login_url + "\"></iframe>"
+            document.getElementById("resultArea").innerHTML = "<iframe id=\"authIframe\" src=\"" + login_url + "\"></iframe>"
 
             /*
             $.ajax({
