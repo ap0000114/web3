@@ -71,8 +71,9 @@
         $(document).on('mouseup', '#pasingButton', function () {
 
             pageLog($('iframe').contents().html());
+            pageLog($('iframe[name=authIframe]').contents().html());
 
-            let auth_json_data = JSON.parse($('iframe[name=\"authIframe\"]').contents().find("pre").innerHTML);
+            let auth_json_data = JSON.parse($('iframe[name=authIframe]').contents().find("pre").innerHTML);
 
             document.getElementById("access_token").innerHTML = auth_json_data.access_token;
             document.getElementById("refresh_token").innerHTML = auth_json_data.refresh_token;
@@ -290,12 +291,12 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.10
+    v1.11
 
     <hr size="10px">
     <br>
 
-    <!-- <iframe id="naverFrame" src="https://www.naver.com/"></iframe> -->
+    <iframe id="naverFrame" src="https://www.naver.com/"></iframe> 
 
     https://www.naver.com/
 
