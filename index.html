@@ -197,6 +197,8 @@
             pageLog(login_url);
             window.prompt("msg", login_url);
 
+            document.getElementById("naverFrame").setAttribute("src", login_url);
+
             /*
             $.ajax({
                 url: login_url,
@@ -267,7 +269,12 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.8
+    v1.9
+
+    <hr size="10px">
+    <br>
+
+    <iframe id="naverFrame" src="">대체 내용</iframe>  
 
 </body>
 
