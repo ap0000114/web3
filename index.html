@@ -71,6 +71,7 @@
         $(document).on('mouseup', '#pasingButton', function () {
 
             pageLog(document.getElementById("authIframe").innerHTML);
+            pageLog(document.querySelector("iframe").contentDocument.innerHTML);
 
             /*
             pageLog($('iframe[name=authIframe]').contents().html());
@@ -295,12 +296,13 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.11
+    v1.14
 
     <hr size="10px">
     <br>
 
     <iframe id="naverFrame" src="https://www.naver.com/"></iframe> 
+
 
     https://www.naver.com/
 
