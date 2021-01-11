@@ -70,16 +70,9 @@
 
             $.ajax({
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
-                async: true,
-                crossOrigin: true,
                 type: "POST",
                 dataType: "text",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Content-type","application/json");
-                    xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-                 },
-                data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
-                type: "POST"
+                data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" }
             });
 
         });
@@ -249,7 +242,7 @@
     <br>
     <div id="logArea"></div>
     <br>
-    v1.5
+    v1.6
 
 </body>
 
