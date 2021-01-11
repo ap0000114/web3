@@ -70,9 +70,9 @@
 
         $(document).on('mouseup', '#pasingButton', function () {
 
-            pageLog(document.getElementById("authIframe").innerHTML);
+            pageLog(document.querySelector("pre").innerHTML);
 
-            let auth_json_data = JSON.parse(document.getElementById("authIframe").innerHTML);
+            let auth_json_data = JSON.parse(document.querySelector("pre").innerHTML);
 
             document.getElementById("access_token").innerHTML = auth_json_data.access_token;
             document.getElementById("refresh_token").innerHTML = auth_json_data.refresh_token;
@@ -290,7 +290,7 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.05
+    v1.06
 
     <hr size="10px">
     <br>
