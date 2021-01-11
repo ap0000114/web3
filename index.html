@@ -68,8 +68,19 @@
 
         });
 
+        $(document).on('mouseup', '#pasingButton', function () {
+
+            let auth_json_data = JSON.parse(document.getElementById("resultArea").innerHTML);
+
+            document.getElementById("access_token").innerHTML = auth_json_data.access_token;
+            document.getElementById("refresh_token").innerHTML = auth_json_data.refresh_token;
+            document.getElementById("token_type").innerHTML = auth_json_data.token_type;
+            document.getElementById("expires_in").innerHTML = auth_json_data.expires_in;
+
+        });
+
         $(document).on('mouseup', '#testButton', function () {
-            
+
 
             $.ajax({
                 url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
@@ -77,18 +88,18 @@
                 crossOrigin: true,
                 async: true,
                 dataType: "text",
-                headers: { 
-                    "Access-Control-Allow-Methods":"POST, GET, OPTIONS, DELETE",
-                    "Access-Control-Max-Age":"3600",
-                    "Access-Control-Allow-Headers":"x-requested-with",
-                    "Access-Control-Allow-Origin":"*"
+                headers: {
+                    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE",
+                    "Access-Control-Max-Age": "3600",
+                    "Access-Control-Allow-Headers": "x-requested-with",
+                    "Access-Control-Allow-Origin": "*"
                 },
                 data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
-                success: function(data){
+                success: function (data) {
                     pageLog("success");
                     pageLog(data);
                 },
-                error: function(){
+                error: function () {
                     pageLog("error");
                     pageLog(data);
                 }
@@ -195,9 +206,8 @@
                 "&state=" + state_url;
 
             pageLog(login_url);
-            window.prompt("msg", login_url);
 
-            document.getElementById("naverFrame").setAttribute("src", "https://www.naver.com/");
+            document.getElementById("resultArea").innerHTML = "<iframe src=\"" + login_url + "\"></iframe>"
 
             /*
             $.ajax({
@@ -260,21 +270,32 @@
     <input type="button" id="loginButton" value="loginButton" />
     <input type="button" id="loginAuthButton" value="loginAuthButton" />
     <input type="button" id="loginTokenDeleteButton" value="loginTokenDeleteButton" />
+    <input type="button" id="pasingButton" value="pasingButton" />
     <input type="button" id="testButton" value="testButton" />
     <br>
+    <hr size="10px">
     access_token =<div id="access_token"></div><br>
     refresh_token =<div id="refresh_token"></div><br>
     token_type =<div id="token_type"></div><br>
     expires_in =<div id="expires_in"></div><br>
+    <hr size="10px">
+    logArea
     <br>
     <div id="logArea"></div>
     <br>
-    v1.0
+    <hr size="10px">
+    resultArea
+    <br>
+    <div id="resultArea"></div>
+    <br>
+    v1.01
 
     <hr size="10px">
     <br>
 
-    <iframe id="naverFrame" src="">대체 내용</iframe>  
+    <iframe id="naverFrame" src="https://www.naver.com/"></iframe>
+
+    https://www.naver.com/
 
 </body>
 
