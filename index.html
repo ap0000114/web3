@@ -217,7 +217,28 @@
 
             document.getElementById("resultArea").innerHTML = "<iframe id=\"authIframe\" src=\"" + login_url + "\"></iframe>"
 
-            
+            $.ajax({
+                url: login_url,
+                type: "OPTIONS",
+                async: true,
+                dataType: "text/plain",
+                headers: { 
+                    "Access-Control-Allow-Methods":"POST, GET, OPTIONS, DELETE",
+                    "Access-Control-Max-Age":"3600",
+                    "Access-Control-Allow-Headers":"x-requested-with",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                success: function(data){
+                    pageLog("success");
+                    pageLog(data);
+                },
+                error: function(){
+                    pageLog("error");
+                    pageLog(data);
+                }
+            });
+
+            /*
             $.ajax({
                 url: login_url,
                 type: "GET",
@@ -239,7 +260,7 @@
                     pageLog(data);
                 }
             });
-            
+            */
 
             //window.location.href = login_url;
             //window.location.href = "https://www.naver.com/";
@@ -296,7 +317,7 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.15
+    v1.16
 
     <hr size="10px">
     <br>
