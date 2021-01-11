@@ -71,7 +71,6 @@
         $(document).on('mouseup', '#pasingButton', function () {
 
             pageLog(document.getElementById("resultArea").querySelector("iframe").innerHTML);
-            pageLog(document.getElementById("resultArea").firstChild().innerHTML);
             pageLog(document.getElementById("resultArea").querySelector("iframe").firstChild().innerHTML);
 
             let auth_json_data = JSON.parse(document.getElementById("resultArea").querySelector("iframe").firstChild().innerHTML);
@@ -292,7 +291,7 @@
     <br>
     <div id="resultArea"></div>
     <br>
-    v1.03
+    v1.04
 
     <hr size="10px">
     <br>
