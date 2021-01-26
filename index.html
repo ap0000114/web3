@@ -1,308 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./jquery.ajax-cross-origin.min.js"></script>
+    <script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.ajax-cross-origin.min.js"></script>
-    <script type="text/javascript">
+        function test() {
 
-        const global_client_id = "rtgvfRcGt3nfOTH1mVuZ";
-        const global_client_secret = "tjfTeXkquy";
-
-        function getUUID() {
-            function s4() {
-                return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-            }
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-        }
-
-        function pageLog(log_data) {
-
-            document.getElementById("logArea").innerHTML = document.getElementById("logArea").innerHTML + log_data + "<br>";
-        }
-
-        $(document).ready(function () {
-            let tempString = location.search;
-            let find_function = "function=";
-
-            if (tempString.indexOf(find_function) != -1) {
-
-                let program_function = tempString.substring(tempString.indexOf(find_function) + find_code.length);
-
-                switch (program_function) {
-                    case login:
-                        login();
-                        break;
-                    case get_token:
-                        get_token();
-
-                        break;
-                    case delete_token:
-                        delete_token();
-                        break;
-                }
-            }
-
-            pageLog(location.search);
-            pageLog("cookies :" + document.cookie);
-        });
-
-
-        $(document).on('mouseup', '#loginButton', function () {
-
-            login();
-
-        });
-
-        $(document).on('mouseup', '#loginAuthButton', function () {
-
-            get_token();
-
-        });
-
-        $(document).on('mouseup', '#loginTokenDeleteButton', function () {
-
-            delete_token();
-
-        });
-
-        $(document).on('mouseup', '#pasingButton', function () {
-
-            pageLog(document.getElementById("authIframe").innerHTML);
-            pageLog(document.querySelector("iframe").contentDocument.innerHTML);
-
-            /*
-            pageLog($('iframe[name=authIframe]').contents().html());
-
-            let auth_json_data = JSON.parse($('iframe[name=authIframe]').contents().find("pre").innerHTML);
-
-            document.getElementById("access_token").innerHTML = auth_json_data.access_token;
-            document.getElementById("refresh_token").innerHTML = auth_json_data.refresh_token;
-            document.getElementById("token_type").innerHTML = auth_json_data.token_type;
-            document.getElementById("expires_in").innerHTML = auth_json_data.expires_in;
-
-            */
-
-        });
-
-        $(document).on('mouseup', '#testButton', function () {
-
+            var overwatchID = "아나킴-31591";
+            var productURL = "https://playoverwatch.com/ko-kr/career/pc/" + encodeURI(overwatchID);
 
             $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbyVtk1keZNREQRXfUi33wdNwjvLh4Z4tfKq-Jc7TR2T4fGXEiQr/exec",
-                type: "POST",
-                crossOrigin: true,
-                async: true,
-                dataType: "text",
-                headers: {
-                    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE",
-                    "Access-Control-Max-Age": "3600",
-                    "Access-Control-Allow-Headers": "x-requested-with",
-                    "Access-Control-Allow-Origin": "*"
-                },
-                data: { access_token: "a", refresh_token: "b", token_type: "c", expires_in: "d" },
-                success: function (data) {
-                    pageLog("success");
-                    pageLog(data);
-                },
-                error: function () {
-                    pageLog("error");
-                    pageLog(data);
-                }
-            });
-
-        });
-
-        function login() {
-
-            let login_url = "https://nid.naver.com/oauth2.0/authorize";
-
-            let response_type = "code";
-            let client_id = global_client_id;
-            let redirect_uri = encodeURI("https://ap0000114.github.io/web3/index.html", "UTF-8");
-            let state = getUUID();
-
-            login_url = login_url +
-                "?response_type=" + response_type +
-                "&client_id=" + client_id +
-                "&redirect_uri=" + redirect_uri +
-                "&state=" + state;
-
-            window.location.href = login_url;
-        }
-
-        function get_token() {
-
-            pageLog("콜백 데이터 URL  : [" + location.href + "]");
-
-            let tempString = location.search;
-
-            let find_code = "code=";
-            let find_state = "state=";
-            let find_error = "error=";
-            let find_error_description = "error_description=";
-
-            let code = "";
-            let state = "";
-            let error = "";
-            let error_description = "";
-
-            if (tempString.indexOf(find_code) != -1) {
-                code = tempString.substring(tempString.indexOf(find_code) + find_code.length);
-
-                if (code.indexOf("&") != -1) {
-                    code = code.substring(0, code.indexOf("&"));
-                }
-                pageLog("code : [" + code + "]");
-            } else {
-                pageLog(find_code + " is not found");
-            }
-
-            if (tempString.indexOf(find_state) != -1) {
-                state = tempString.substring(tempString.indexOf(find_state) + find_state.length);
-
-                if (state.indexOf("&") != -1) {
-                    state = state.substring(0, state.indexOf("&"));
-                }
-                pageLog("state : [" + state + "]");
-            } else {
-                pageLog(find_state + " is not found");
-            }
-
-            if (tempString.indexOf(find_error) != -1) {
-                error = tempString.substring(tempString.indexOf(find_error) + find_error.length);
-
-                if (error.indexOf("&") != -1) {
-                    error = error.substring(0, error.indexOf("&"));
-                }
-                pageLog("error : [" + error + "]");
-            } else {
-                pageLog(find_error + " is not found");
-            }
-
-            if (tempString.indexOf(find_error_description) != -1) {
-                error_description = tempString.substring(tempString.indexOf(find_error_description) + find_error_description.length);
-
-                if (error_description.indexOf("&") != -1) {
-                    error_description = error_description.substring(0, error_description.indexOf("&"));
-                }
-                pageLog("error_description : [" + error_description + "]");
-            } else {
-                pageLog(find_error_description + " is not found");
-            }
-
-
-            let login_url = "https://nid.naver.com/oauth2.0/token";
-
-            let grant_type = "authorization_code";
-            let client_id = global_client_id;
-            let client_secret = global_client_secret;
-            let code_url = code;
-            let state_url = state;
-
-            let refresh_token = "";
-            let access_token = "";
-            let service_provider = "";
-
-            login_url = login_url +
-                "?grant_type=" + grant_type +
-                "&client_id=" + client_id +
-                "&client_secret=" + client_secret +
-                "&code=" + code_url +
-                "&state=" + state_url;
-
-            pageLog(login_url);
-
-            //document.getElementById("resultArea").innerHTML = "<iframe id=\"authIframe\" src=\"" + login_url + "\"></iframe>"
-
-            
-            /*
-            $.ajax({
-                url: login_url,
+                url: productURL,
                 type: "GET",
                 crossOrigin: true,
-                async: true,
-                dataType: "text/plain",
-                headers: { 
-                    "Access-Control-Allow-Methods":"POST, GET, OPTIONS, DELETE",
-                    "Access-Control-Max-Age":"3600",
-                    "Access-Control-Allow-Headers":"x-requested-with",
-                    "Access-Control-Allow-Origin":"*"
+                timeout: 3000,
+                //async: true,
+                dataType: "text",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("scheme", "https");
+
                 },
-                success: function(data){
-                    pageLog("success");
-                    pageLog(data);
+                success: function (data) {
+                    console.log("success");
+                    console.log(data);
                 },
-                error: function(){
-                    pageLog("error");
-                    pageLog(data);
+                error: function (data) {
+                    console.log("error");
+                    console.log(data);
                 }
             });
-            */
-
-            //window.location.href = login_url;
-            //window.location.href = "https://www.naver.com/";
-        }
-
-        function delete_token() {
-
-            let login_url = "https://nid.naver.com/oauth2.0/authorize";
-
-            let grant_type = "delete";
-            let client_id = global_client_id;
-            let client_secret = global_client_secret;
-            let access_token = "";
-            let service_provider = "NAVER";
-
-            login_url = login_url +
-                "?grant_type=" + grant_type +
-                "&client_id=" + client_id +
-                "&client_secret=" + client_secret +
-                "&access_token=" + access_token +
-                "&service_provider=" + service_provider;
-
-
         }
 
 
+        $(document).on('mouseup', '#btn', function () {
+            var temp = $("#input").val();
+
+            test()
+        });
+
+        $(document).ready(function () {
+
+        });
 
 
     </script>
-
-
 </head>
 
 <body>
-
-    <input type="button" id="loginButton" value="loginButton" />
-    <input type="button" id="loginAuthButton" value="loginAuthButton" />
-    <input type="button" id="loginTokenDeleteButton" value="loginTokenDeleteButton" />
-    <input type="button" id="pasingButton" value="pasingButton" />
-    <input type="button" id="testButton" value="testButton" />
-    <input type="button" value="gotoFirst" onclick="location.href='https://ap0000114.github.io/web3/index.html'"/>
-    <br>
-    <hr size="10px">
-    access_token =<div id="access_token"></div><br>
-    refresh_token =<div id="refresh_token"></div><br>
-    token_type =<div id="token_type"></div><br>
-    expires_in =<div id="expires_in"></div><br>
-    <hr size="10px">
-    logArea
-    <br>
-    <div id="logArea"></div>
-    <br>
-    <hr size="10px">
-    resultArea
-    <br>
-    <div id="resultArea"></div>
-    <br>
-    v1.19
-
-    <hr size="10px">
-    <br>
-
+    <input type="text" id="input" name="inputname" value="에코골프화">
+    <input type="button" id="btn" value="asdf">
+1
 </body>
 
 </html>
