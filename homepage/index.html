@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Document</title>
+
+    <script src="./js/jquery.min.js"></script>
+    <script>
+
+        function blurContainerLoad() {
+            $(".blurContainer").remove();
+            var blurContainer = window.document.createElement("div");
+            var img1 = window.document.createElement("img");
+            var img2 = window.document.createElement("img");
+            var img3 = window.document.createElement("img");
+
+            blurContainer.className = "blurContainer";
+            img1.src = "src/shutterstock_472589506.jpg";
+            img2.src = "src/shutterstock_549410590.jpg";
+            img3.src = "src/shutterstock_1020987697.jpg";
+
+            img1.itblur = "current";
+            img2.itblur = "notCurrent";
+            img3.itblur = "notCurrent";
+
+            img1.blurIndex = 0;
+            img2.blurIndex = 1;
+            img3.blurIndex = 2;
+
+            blurContainer.appendChild(img1);
+            blurContainer.appendChild(img2);
+            blurContainer.appendChild(img3);
+            $(".header").prepend(blurContainer);
+
+            var interval = setInterval(function () {
+                if ($(".blurContainer").length > 0) {
+                    $(".blurContainer").each(function () {
+                        this.style.height = $(".blurContainer img")[0].clientHeight + "px";
+                        //this.style.height = window.innerHeight + "px";
+                    });
+                    blur();
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+
+        window.onload = function () {
+            blurContainerLoad();
+
+        }
+
+        var resizeTimer;
+        window.addEventListener('resize', function (event) {
+            window.scrollTo(0, 0);
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+
+                console.dir("resize");
+                blurContainerLoad();
+            }, 500);
+
+        });
+
+        var scrollTimer;
+        window.addEventListener('scroll', function (event) {
+
+            $(".blurContainer img").each(function () {
+                this.style.maxWidth = Number(window.innerWidth + (this.y * - 1)) + "px";
+            });
+
+            if($(".blurContainer")[0].clientHeight - window.scrollY < $(".headerLogo")[0].clientHeight * 1.5){
+                
+            }
+            
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function () {
+            }, 50);
+
+        });
+
+        var blurInterval;
+        function blur() {
+
+            var blurIndex = 0;
+            clearInterval(blurInterval);
+            blurInterval = setInterval(function () {
+                $('.blurContainer img').each(function () {
+                    if (this.itblur == "current") {
+                        this.style.opacity = "100%";
+                    } else if (this.itblur == "notCurrent") {
+                        this.style.opacity = "0%";
+                    }
+
+                    if (this.blurIndex == blurIndex) {
+                        this.itblur = "current";
+                    } else {
+                        this.itblur = "notCurrent";
+                    }
+                });
+                if ($('.blurContainer img').length - 1 == blurIndex) {
+                    blurIndex = 0;
+                } else {
+                    blurIndex++;
+                }
+            }, 3000);
+        }
+
+
+        function slide() {
+
+            var slideIndex = 0;
+            setInterval(function () {
+                $('.slider')[0].style.left = -($(".item")[0].clientWidth * slideIndex) + 'px';
+
+                slideIndex++;
+                if (slideIndex === $(".item").length) {
+                    slideIndex = 0;
+                }
+            }, 3000);
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="./src/logo.png" class="headerLogo">
+        <div class="headerBtns">
+            <div id="golf" class="button">골프 웨어</div>
+            <div id="shoe" class="button">슈즈</div>
+            <div id="acc" class="button">액세서리</div>
+        </div>
+    </div>
+    <!-- <script src="./js/slide.js"></script> -->
+
+
+    <div class="content">
+        <div>is simply dummy text of the printing and typesetting industry. <br>
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+        <img src="./src/content1.png" class="contentImg">
+        <img src="./src/content2.png" class="contentImg">
+
+        <!--
+        <div class="slideContainer">
+            <ul class="slider">
+                <li class="item">
+                    <img src="src/shutterstock_472589506.jpg">
+                </li>
+                <li class="item">
+                    <img src="src/shutterstock_549410590.jpg">
+                </li>
+                <li class="item">
+                    <img src="src/shutterstock_1020987697.jpg">
+                </li>
+            </ul>
+        </div>
+        -->
+    </div>
+</body>
+
+</html>
